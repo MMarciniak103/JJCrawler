@@ -3,7 +3,8 @@ import scrapy
 from scrapy_selenium import SeleniumRequest
 from selenium.webdriver.common.keys import Keys
 from scrapy.selector import Selector
-import time 
+import time
+ 
 
 class JjcrawlerSpider(scrapy.Spider):
 		name = 'jjcrawler'
@@ -19,7 +20,6 @@ class JjcrawlerSpider(scrapy.Spider):
 				wait_time = 3,
 				callback = self.parse
 				)
-
 
 		def parse_position(self,content):
 			#Content in form: 'position: absolute; left: 0px; top: 0px; height: 89px; width: 100%;'
@@ -79,8 +79,9 @@ class JjcrawlerSpider(scrapy.Spider):
 						'title':item.xpath(f"normalize-space({self.ITEM_SELECTOR}/{self.UPPER_ROW}/div[@class='css-18hez3m']/div[@class='css-wjfk7i']/text())").get(),
 						'price range':item.xpath(f"normalize-space({self.ITEM_SELECTOR}/{self.UPPER_ROW}/div[@class='css-v6uxww']/span/text())").get(),
 						'company':item.xpath(f"normalize-space({self.ITEM_SELECTOR}/{self.BOTTOM_ROW}/div[@class='css-pdwro7']/div[@class='css-ajz12e']/text())").get(),
-						'city':item.xpath(f"normalize-space({self.ITEM_SELECTOR}/{self.BOTTOM_ROW}/div[@class='css-pdwro7']/div[@class='css-1n50ecq']/text())").get(),
+						'city':item.xpath(f"normalize-space({self.ITEM_SELECTOR}/{self.BOTTOM_ROW}/div[@class='css-pdwro7']/div[@class='css-1ihx907']/text())").get(),
 						'keywords':keywords
+
 						}
 
 
