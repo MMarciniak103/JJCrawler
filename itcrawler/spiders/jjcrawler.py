@@ -9,8 +9,9 @@ import time
 class JjcrawlerSpider(scrapy.Spider):
 		name = 'jjcrawler'
 		SCROLL_PAUSE_TIME = 0.5
+		WRAPPER_SELECTOR = ".//a[@class='css-18rtd1e']"
 		TABLE_LAYOUT = "//div[@class='css-1macblb']" #must be keyborard reachable
-		ITEM_SELECTOR = ".//a[@class='css-18rtd1e']/div[@class='css-xhufe5']" #Single item in offer list
+		ITEM_SELECTOR = f"{WRAPPER_SELECTOR}/div[@class='css-xhufe5']" #Single item in offer list
 		UPPER_ROW = "div[@class='css-qjm23f']" #Upper row containing offer name and price
 		BOTTOM_ROW = "div[@class='css-mih8cb']" #Bottom row containing company name, city and tags
 
@@ -80,8 +81,8 @@ class JjcrawlerSpider(scrapy.Spider):
 						'price range':item.xpath(f"normalize-space({self.ITEM_SELECTOR}/{self.UPPER_ROW}/div[@class='css-v6uxww']/span/text())").get(),
 						'company':item.xpath(f"normalize-space({self.ITEM_SELECTOR}/{self.BOTTOM_ROW}/div[@class='css-pdwro7']/div[@class='css-ajz12e']/text())").get(),
 						'city':item.xpath(f"normalize-space({self.ITEM_SELECTOR}/{self.BOTTOM_ROW}/div[@class='css-pdwro7']/div[@class='css-1ihx907']/text())").get(),
-						'keywords':keywords
-
+						'keywords':keywords,
+						'url':item.xpath(f"{self.WRAPPER_SELECTOR}").xpath(".//@href").get()
 						}
 
 
