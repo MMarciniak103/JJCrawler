@@ -6,6 +6,7 @@ They are implemented with usage of scrapy and selenium libraries.
 Implemented scrapers for:
 * [JustJoinIT](https://justjoin.it/) - crawler name: jjcrawler
 * [No Fluff Jobs](https://nofluffjobs.com/jobs/) - crawler name: nfjcrawler
+* [Bulldog Job](https://bulldogjob.com/companies/jobs/) - crawler name: bdcrawler
 >
 ### How to run:
 >
