@@ -48,9 +48,9 @@ class NfjcrawlerSpider(scrapy.Spider):
 					yield {
 					'title':item.xpath(f"normalize-space({self.FIRST_COL}/h4/text())").get(),
 					'price range': ''.join(item.xpath(f"{self.SECOND_COL}/nfj-posting-item-tags/span[@class='text-truncate badgy salary btn btn-outline-secondary btn-sm']/text()").extract()),
-					'company':item.xpath(f"normalize-space({self.FIRST_COL}/span/text())").get().replace('in','',1),
+					'company':item.xpath(f"normalize-space({self.FIRST_COL}/span/text())").get().replace('in','',1).replace('w ','',1),
 					'city':item.xpath(f"normalize-space({self.SECOND_COL}/span[@class='posting-info__location d-flex align-items-center ml-auto']/nfj-posting-item-city/text())").get(),
-					'keywords':''.join(item.xpath(f"{self.SECOND_COL}/nfj-posting-item-tags/span[@class='text-truncate badgy technology btn btn-outline-secondary btn-sm']/text()").extract()),
+					'keywords':''.join(item.xpath("./a/div[@class='posting-info position-relative d-none d-lg-flex flex-grow-1']/nfj-posting-item-tags[@class='ml-3']/nfj-posting-item-tag/object/a/text()").extract()),
 					'url':item.xpath('./a/@href').get()
 					}
 				

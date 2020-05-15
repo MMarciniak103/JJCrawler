@@ -7,6 +7,7 @@ import time
  
 
 class JjcrawlerSpider(scrapy.Spider):
+	
 		name = 'jjcrawler'
 		SCROLL_PAUSE_TIME = 0.5
 		WRAPPER_SELECTOR = ".//a[@class='css-18rtd1e']"
