@@ -22,3 +22,7 @@ If you want to save crawler output to file, run:
 ```python
 scrapy crawl CRAWLER_NAME -o FILE_NAME
 ```
+For example:
+```python
+scrapy crawl bdcrawler -o bdoffers.json
+```
