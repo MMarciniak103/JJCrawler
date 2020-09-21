@@ -10,11 +10,11 @@ class JjcrawlerSpider(scrapy.Spider):
 	
 		name = 'jjcrawler'
 		SCROLL_PAUSE_TIME = 0.5
-		WRAPPER_SELECTOR = ".//a[@class='css-18rtd1e']"
-		TABLE_LAYOUT = "//div[@class='css-1macblb']" #must be keyborard reachable
-		ITEM_SELECTOR = f"{WRAPPER_SELECTOR}/div[@class='css-xhufe5']" #Single item in offer list
-		UPPER_ROW = "div[@class='css-qjm23f']" #Upper row containing offer name and price
-		BOTTOM_ROW = "div[@class='css-mih8cb']" #Bottom row containing company name, city and tags
+		WRAPPER_SELECTOR = ".//a[@class='css-110u7ph']"
+		TABLE_LAYOUT = "//div[@class='css-ic7v2w']" #must be keyborard reachable
+		ITEM_SELECTOR = "./a[@class='css-18rtd1e']/div[@class='css-rmb95w']" #Single item in offer list
+		UPPER_ROW = "div[@class='css-fxb39h']" #Upper row containing offer name and price
+		BOTTOM_ROW = "div[@class='css-m6o8yl']" #Bottom row containing company name, city and tags
 
 		def start_requests(self): 
 			yield SeleniumRequest(
@@ -71,19 +71,19 @@ class JjcrawlerSpider(scrapy.Spider):
 				for item in offer_list.xpath(".//div[starts-with(@style,'position:')]"):
 					item_pos = self.parse_position(item.xpath(".//@style").get())
 					keywords = []
-					for keyword in item.xpath(f"{self.ITEM_SELECTOR}/{self.BOTTOM_ROW}/div[@class='css-1ij7669']/div"):
+					for keyword in item.xpath(f"{self.ITEM_SELECTOR}/{self.BOTTOM_ROW}/div[@class='css-1ij7669']/div[@class='tag css-1g8us6r']"):
 						keywords.append(keyword.xpath("normalize-space(.//text())").get())
 					#If your current item position was seen in previous iteration -> ignore it
 					if item_pos <= last_top_position_seen:
 						continue
 					else:
 						yield{
-						'title':item.xpath(f"normalize-space({self.ITEM_SELECTOR}/{self.UPPER_ROW}/div[@class='css-18hez3m']/div[@class='css-wjfk7i']/text())").get(),
-						'price range':item.xpath(f"normalize-space({self.ITEM_SELECTOR}/{self.UPPER_ROW}/div[@class='css-v6uxww']/span/text())").get(),
+						'title':item.xpath(f"normalize-space({self.ITEM_SELECTOR}/{self.UPPER_ROW}/div[@class='css-18hez3m']/div[@class='css-1x9zltl']/text())").get(),
+						'price range':item.xpath(f"normalize-space({self.ITEM_SELECTOR}/{self.UPPER_ROW}/div[@class='css-16tql6o']/span/text())").get(),
 						'company':item.xpath(f"normalize-space({self.ITEM_SELECTOR}/{self.BOTTOM_ROW}/div[@class='css-pdwro7']/div[@class='css-ajz12e']/text())").get(),
 						'city':item.xpath(f"normalize-space({self.ITEM_SELECTOR}/{self.BOTTOM_ROW}/div[@class='css-pdwro7']/div[@class='css-1ihx907']/text())").get(),
 						'keywords':keywords,
-						'url':item.xpath(f"{self.WRAPPER_SELECTOR}").xpath(".//@href").get()
+						'url':'justjoin.it'+item.xpath("./a[@class='css-18rtd1e']/@href").get()
 						}
 
 
