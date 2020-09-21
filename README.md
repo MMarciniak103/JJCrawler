@@ -1,6 +1,6 @@
 # JJCrawler
 >
-## A web crawlers collection used to scrap job offers from top websites. Each of them returns data in a json format. 
+## A web crawlers collection used to scrap job offers from popular websites. Each of them returns data in a json format. 
 They are implemented with usage of scrapy and selenium libraries. 
 >
 
