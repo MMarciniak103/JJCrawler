@@ -9,8 +9,8 @@ class NfjcrawlerSpider(scrapy.Spider):
 
 		name = 'nfjcrawler'
 		PAUSE_TIME = 1
-		FIRST_COL = "./a/nfj-posting-item-title/div[@class='posting-title__wrapper']"
-		SECOND_COL = "./a/div[@class='posting-info position-relative d-none d-lg-flex flex-grow-1']"
+		FIRST_COL = "./nfj-posting-item-title/div[@class='posting-title__wrapper']"
+		SECOND_COL = "./div[contains(@class,'posting-info')]"
 
 		#
 		def start_requests(self):
@@ -42,16 +42,16 @@ class NfjcrawlerSpider(scrapy.Spider):
 
 			for i in range(last_button):
 
-				content_wrapper = response_obj.xpath(".//div[@class='main-content__wrapper']/div/nfj-postings-search/div[@class='container mb-5']/nfj-main-loader/div[@class='mt-5']/nfj-search-results/nfj-postings-list")
+				content_wrapper = response_obj.xpath(".//nfj-search-results/nfj-postings-list")
 
-				for item in content_wrapper.xpath(".//nfj-postings-item"):
+				for item in  content_wrapper.xpath(".//a[contains(@class,'posting-list-item')]"):
 					yield {
 					'title':item.xpath(f"normalize-space({self.FIRST_COL}/h4/text())").get(),
 					'price range': ''.join(item.xpath(f"{self.SECOND_COL}/nfj-posting-item-tags/span[@class='text-truncate badgy salary btn btn-outline-secondary btn-sm']/text()").extract()),
-					'company':item.xpath(f"normalize-space({self.FIRST_COL}/span/text())").get().replace('in','',1).replace('w ','',1),
+					'company':item.xpath(f"normalize-space({self.FIRST_COL}/span/text())").get().replace('w ','',1),
 					'city':item.xpath(f"normalize-space({self.SECOND_COL}/span[@class='posting-info__location d-flex align-items-center ml-auto']/nfj-posting-item-city/text())").get(),
 					'keywords':''.join(item.xpath("./a/div[@class='posting-info position-relative d-none d-lg-flex flex-grow-1']/nfj-posting-item-tags[@class='ml-3']/nfj-posting-item-tag/object/a/text()").extract()),
-					'url':item.xpath('./a/@href').get()
+					'url':'nofluffjobs.com'+item.xpath('./@href').get()
 					}
 				
 				# Go to the next page 
