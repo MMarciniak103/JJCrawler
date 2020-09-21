@@ -58,7 +58,11 @@ class BDcrawlerSpider(scrapy.Spider):
 					}
 				
 				# Go to the next page 
-				next_button = driver.find_element_by_xpath(".//ul[@class='pagination']/li[@class='active']/following-sibling::li[1]/a")
+				try:
+					next_button = driver.find_element_by_xpath(".//ul[@class='pagination']/li[@class='active']/following-sibling::li[1]/a")
+				except Exception:
+					print('It was last page...')
+					break
 				driver.execute_script("arguments[0].click();", next_button)
 				
 				time.sleep(self.PAUSE_TIME)
