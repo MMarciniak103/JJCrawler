@@ -12,7 +12,7 @@ Implemented scrapers for:
 >
 Change your working directory to project directory, and run:
 ```python
-pip install requirements.txt
+pip install -r requirements.txt
 ```
 To call specific crawler, in your terminal type:
 ```python
