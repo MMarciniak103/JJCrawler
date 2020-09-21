@@ -3,6 +3,10 @@
 ## A web crawlers collection used to scrap job offers from top websites. Each of them returns data in a json format. 
 They are implemented with usage of scrapy and selenium libraries. 
 >
+
+###  This version assumes that you have firefox installed !
+
+>
 Implemented scrapers for:
 * [JustJoinIT](https://justjoin.it/) - crawler name: jjcrawler
 * [No Fluff Jobs](https://nofluffjobs.com/jobs/) - crawler name: nfjcrawler
