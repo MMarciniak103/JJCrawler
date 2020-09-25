@@ -79,7 +79,7 @@ class JjcrawlerSpider(scrapy.Spider):
 					else:
 						yield{
 						'title':item.xpath(f"normalize-space({self.ITEM_SELECTOR}/{self.UPPER_ROW}/div[@class='css-18hez3m']/div[@class='css-1x9zltl']/text())").get(),
-						'price range':item.xpath(f"normalize-space({self.ITEM_SELECTOR}/{self.UPPER_ROW}/div[@class='css-16tql6o']/span/text())").get(),
+						'price range':''.join(item.xpath(f"normalize-space({self.ITEM_SELECTOR}/{self.UPPER_ROW}/div[@class='css-16tql6o']/span/text())").get()),
 						'company':item.xpath(f"normalize-space({self.ITEM_SELECTOR}/{self.BOTTOM_ROW}/div[@class='css-pdwro7']/div[@class='css-ajz12e']/text())").get(),
 						'city':item.xpath(f"normalize-space({self.ITEM_SELECTOR}/{self.BOTTOM_ROW}/div[@class='css-pdwro7']/div[@class='css-1ihx907']/text())").get(),
 						'keywords':keywords,
