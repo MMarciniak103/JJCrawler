@@ -49,7 +49,7 @@ class BDcrawlerSpider(scrapy.Spider):
 
 				for item in content_wrapper.xpath(".//a[starts-with(@class,'job-item')]"):
 					yield {
-					'title':item.xpath(f"normalize-space({self.JOB_DETAILS_DIV}/div[@class='title']/h2/text())").get(),
+					'title':item.xpath(f"normalize-space({self.JOB_DETAILS_DIV}/div[@class='title']/h3/text())").get(),
 					'price range': ''.join(item.xpath(f"{self.JOB_DETAILS_DIV}/{self.META_DIV}/div[@class='salary']/text()").extract()),
 					'company':item.xpath(f"normalize-space({self.JOB_DETAILS_DIV}/{self.META_DIV}/div[@class='company']/text())").get(),
 					'city':item.xpath(f"normalize-space({self.JOB_DETAILS_DIV}/{self.META_DIV}/div[@class='location']//following-sibling::text())").get(),
